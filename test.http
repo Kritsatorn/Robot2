@@ -1,0 +1,37 @@
+POST http://localhost:8080/tweets
+Content-Type: application/json
+
+{
+  "username": "darmmykung",
+  "content": "อยากฟังคำนั้นที่เธอไม่เคยบอก"
+}
+
+###
+POST http://localhost:8080/tweets
+Content-Type: application/json
+
+{
+  "username": "darmmykung",
+  "content": "เบื่อจังเลย"
+}
+
+###
+POST http://localhost:8080/tweets
+Content-Type: application/json
+
+{
+  "username": "ptongkung",
+  "content": "ทำไมน้องไม่ยกมือกันเลย"
+}
+###
+GET http://localhost:8080/tweets
+###
+PUT http://localhost:8080/tweets/1
+Content-Type: application/json
+
+{
+  "username": "darmmykung",
+  "content": "ไม่ชอบวิชานี้เลยว่ะ"
+}
+###
+DELETE http://localhost:8080/tweets/1
