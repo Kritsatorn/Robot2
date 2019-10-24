@@ -1,11 +1,13 @@
 // Import express
 const express = require('express');
+const cors = require('cors');
 
-const host = 'localhost';
+const host = '0.0.0.0';
 const port = 8080;
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // localhost:8080/greeting
@@ -39,6 +41,7 @@ app.post("/tweets", function (request, response) {
   const newTweet = {
     username: username,
     content: content,
+    time: Date(),
     id: currentId,
   };
 
