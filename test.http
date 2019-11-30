@@ -2,38 +2,32 @@ POST http://localhost:8080/distance
 Content-Type: application/json
 
 {
-  "first_pos": {"x": 3, "y": -2},
-  "second_pos": {"x": -1, "y": 1}
+  "first_pos": {"x": 0, "y": 0},
+  "second_pos": {"x": 1, "y": 2}
 }
 ###
 GET http://localhost:8080/robots
 
 ###
-POST http://localhost:8080/tweets
+PUT http://localhost:8080/robot/1/position
 Content-Type: application/json
 
 {
-  "username": "darmmykung",
-  "content": "เบื่อจังเลย"
+  "position": {"x": 3, "y": 4}
 }
 
 ###
-POST http://localhost:8080/tweets
+PUT http://localhost:8080/robot/1/position
 Content-Type: application/json
 
 {
-  "username": "ptongkung",
-  "content": "ทำไมน้องไม่ยกมือกันเลย"
+  "position": {"x": 5, "y": 6}
 }
+
 ###
-GET http://localhost:8080/tweets
-###
-PUT http://localhost:8080/tweets/1
+POST http://localhost:8080/distance
 Content-Type: application/json
 
 {
-  "username": "darmmykung",
-  "content": "ไม่ชอบวิชานี้เลยว่ะ"
+  "first_pos": "robot#1", "second_pos": {"x": 0, "y": 8}
 }
-###
-DELETE http://localhost:8080/tweets/1

@@ -26,69 +26,78 @@ app.post("/distance", function (request, response) {
     second_pos
   } = request.body;
 
-  const robot = {
-    distance : Math.sqrt( (first_pos.x-second_pos.x)*(first_pos.x-second_pos.x) + (first_pos.y-second_pos.y)*(first_pos.y-second_pos.y)  ),
-    id : currentId
+  if (typeof first_pos === 'string') {
+    arr = first_pos.split("");
+    if (arr.length == 7){
+      id = arr[6];
+    }
+    else {
+      id = arr[6] + arr[7];
+    }
+    const robotFind =  robots.find(function (robot) {
+      return  robot.id == id;
+    });
+    a = robotFind.position.x;
+    b = robotFind.position.y;
+  }
+  else {
+    a = first_pos.x;
+    b = first_pos.y;
   }
 
-    robots.push(robot);
+  if (typeof second_pos === 'string') {
+    arr = second_pos.split("");
+    if (arr.length == 7){
+      id = arr[6];
+    }
+    else {
+      id = arr[6] + arr[7];
+    }
+    const robotFind =  robots.find(function (robot) {
+      return  robot.id == id;
+    });
+    c = robotFind.position.x;
+    d = robotFind.position.y;
+  }
+  else {
+    c = second_pos.x;
+    d = second_pos.y;
+  }
+  console.log(first_pos)
+
+  const distance = {
+    dis : Math.sqrt( (a-c)*(a-c) + (b-d)*(b-d)  )
+  }
+
+    response.status(200).send(distance);
     response.sendStatus(201);
 });
 
-
-
-
-
-// POST localhost:8080/tweets
-app.post("/tweets", function (request, response) {
+// PUT localhost:8080/robot/{robot_id}/position
+app.put("/robot/:id/position", function (request, response) {
+  const id = request.params.id;
   const {
-    username,
-    content
+    position
   } = request.body;
-  const newTweet = {
-    username: username,
-    content: content,
-    time: Date(),
-    id: currentId,
-  };
 
-  tweets.push(newTweet);
-  currentId += 1;
-  console.log(`@${username}: ${content}`);
-  response.sendStatus(201);
+  const robotToEdit =  robots.find(function (robot) {
+    return  robot.id == id;
+  });
+
+  if (robotToEdit) {
+    robotToEdit.position = position;
+  }
+  else {
+    const robot = {
+      id,
+      position : position
+    }
+    robots.push(robot);
+  }
+
+  response.sendStatus(200);
 });
 
-// GET localhost:8080/tweets
-app.get("/tweets", function (request, response) {
-  response.send(tweets);
-})
-
-// PUT localhost:8080/tweets/:id
-app.put("/tweets/:id", function (request, response) {
-  const id = request.params.id;
-  const {
-    username,
-    content
-  } = request.body;
-
-  const tweetToEdit = tweets.find(function (tweet) {
-    return tweet.id == id;
-  });
-
-  tweetToEdit.username = username;
-  tweetToEdit.content = content;
-
-  response.sendStatus(200);
-})
-
-// DELETE localhost:8080/tweets/:id
-app.delete("/tweets/:id", function (request, response) {
-  const id = request.params.id;
-  tweets = tweets.filter(function (tweet) {
-    return tweet.id != id;
-  });
-  response.sendStatus(200);
-})
 
 app.listen(port, host, function () {
   console.log("Application is running");
