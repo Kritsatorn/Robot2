@@ -59,3 +59,27 @@ Content-Type: application/json
   "second_pos": {"x": -1, "y": 1},
   "metric": "euclidean"
 }
+
+###
+GET  http://localhost:8080/closestpair
+###
+PUT http://localhost:8080/robot/1/position
+Content-Type: application/json
+
+{
+  "position": {"x": -1, "y": 1}
+}
+###
+PUT http://localhost:8080/robot/2/position
+Content-Type: application/json
+
+{
+  "position": {"x": 3, "y": -3}
+}
+###
+PUT http://localhost:8080/robot/4/position
+Content-Type: application/json
+
+{
+  "position": {"x": 5, "y": -2}
+}

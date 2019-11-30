@@ -140,6 +140,29 @@ app.post("/nearest", function (request, response) {
   response.status(200).send(ans);
 });
 
+//Extension E
+app.get("/closestpair", function (request, response) {
+  // let Body = request.body;
+     let min = Math.pow(2,40);
+   //response.send(Body);
+     for(let i=0;i<robots.length;i++)
+     {
+       for(let j=i+1;j<robots.length;j++)
+       {
+         let k = euclid(robots[i].position.x,robots[i].position.y,robots[j].position.x,robots[j].position.y);
+         if(k<min)
+           min = k ;
+       }
+     }
+   let ans = { "distance":min};
+
+   if(robots.length <= 1)
+     response.status(200).send();
+   else
+     response.status(200).send(ans);
+
+ });
+
 
 app.listen(port, host, function () {
   console.log("Application is running");
