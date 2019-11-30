@@ -31,3 +31,11 @@ Content-Type: application/json
 {
   "first_pos": "robot#1", "second_pos": {"x": 0, "y": 8}
 }
+
+###
+POST http://localhost:8080/nearest
+Content-Type: application/json
+
+{
+  "ref_position": {"x": -1, "y": 1}
+}

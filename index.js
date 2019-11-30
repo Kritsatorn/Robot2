@@ -98,6 +98,41 @@ app.put("/robot/:id/position", function (request, response) {
   response.sendStatus(200);
 });
 
+//
+
+function euclid(x1,y1,x2,y2)
+{
+  	return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+}
+
+//http://localhost:8080/nearest
+app.post("/nearest", function (request, response) {
+  let Body = request.body;
+  //response.send(Body);
+  let ref = Body["ref_position"];
+  let min = Math.pow(2,50);
+  let id_ans = 0;
+
+  robots.forEach(function(item){
+     let k = euclid(item.position.x,item.position.y,ref.x,ref.y);
+     if(k<min)
+     {
+      min = k;
+      id_ans = item.id;
+     }
+  });
+  let Arr = []
+
+  if(id_ans != 0 && id_ans != null)
+    Arr.push(id_ans);
+
+  const ans = {
+    "robot_ids":Arr
+  };
+
+  response.status(200).send(ans);
+});
+
 
 app.listen(port, host, function () {
   console.log("Application is running");
