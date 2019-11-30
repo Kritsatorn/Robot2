@@ -23,7 +23,8 @@ app.get("/robots", function (request, response) {
 app.post("/distance", function (request, response) {
   const {
     first_pos,
-    second_pos
+    second_pos,
+    metric
   } = request.body;
 
   if (typeof first_pos === 'string') {
@@ -63,10 +64,16 @@ app.post("/distance", function (request, response) {
     c = second_pos.x;
     d = second_pos.y;
   }
-  console.log(first_pos)
+
+  dis = Math.sqrt( (a-c)*(a-c) + (b-d)*(b-d)  )
+  if( metric ) {
+    if (metric == "manhattan") {
+      dis = Math.abs(a-c) + Math.abs(b-d);
+    }
+  }
 
   const distance = {
-    dis : Math.sqrt( (a-c)*(a-c) + (b-d)*(b-d)  )
+    dis
   }
 
     response.status(200).send(distance);

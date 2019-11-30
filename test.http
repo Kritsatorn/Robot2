@@ -39,3 +39,23 @@ Content-Type: application/json
 {
   "ref_position": {"x": -1, "y": 1}
 }
+
+###
+POST http://localhost:8080/distance
+Content-Type: application/json
+
+{
+  "first_pos": {"x": 3, "y": -2},
+  "second_pos": {"x": -1, "y": 1},
+  "metric": "manhattan"
+}
+
+###
+POST http://localhost:8080/distance
+Content-Type: application/json
+
+{
+  "first_pos": {"x": 3, "y": -2},
+  "second_pos": {"x": -1, "y": 1},
+  "metric": "euclidean"
+}
