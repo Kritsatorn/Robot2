@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 const host = '0.0.0.0';
-const port = 8080;
+const port = 8000;
 
 const app = express();
 
