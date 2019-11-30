@@ -1,10 +1,12 @@
-POST http://localhost:8080/tweets
+POST http://localhost:8080/distance
 Content-Type: application/json
 
 {
-  "username": "darmmykung",
-  "content": "อยากฟังคำนั้นที่เธอไม่เคยบอก"
+  "first_pos": {"x": 3, "y": -2},
+  "second_pos": {"x": -1, "y": 1}
 }
+###
+GET http://localhost:8080/robots
 
 ###
 POST http://localhost:8080/tweets

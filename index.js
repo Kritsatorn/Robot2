@@ -10,28 +10,35 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// localhost:8080/greeting
-app.get("/greeting", function (request, response) {
+let robots = [];
+let currentId = 0;
+
+// localhost:8080/robots
+app.get("/robots", function (request, response) {
   console.log("YAY! New request is coming!");
-  response.status(200).send("Hello world!");
+  response.status(200).send(robots);
 });
 
-// localhost:8080/sum
-app.post("/sum", function (request, response) {
+// localhost:8080/distance
+app.post("/distance", function (request, response) {
   const {
-    a,
-    b
+    first_pos,
+    second_pos
   } = request.body;
 
-  if (typeof a !== "number" || typeof b !== "number") {
-    response.sendStatus(400);
-  } else {
-    response.status(200).send(`${a} + ${b} = ${a + b}`);
+  const robot = {
+    distance : Math.sqrt( (first_pos.x-second_pos.x)*(first_pos.x-second_pos.x) + (first_pos.y-second_pos.y)*(first_pos.y-second_pos.y)  ),
+    id : currentId
   }
+
+    robots.push(robot);
+    response.sendStatus(201);
 });
 
-let tweets = [];
-let currentId = 0;
+
+
+
+
 // POST localhost:8080/tweets
 app.post("/tweets", function (request, response) {
   const {
@@ -85,4 +92,5 @@ app.delete("/tweets/:id", function (request, response) {
 
 app.listen(port, host, function () {
   console.log("Application is running");
+  console.log(port);
 });
