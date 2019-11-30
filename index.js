@@ -157,10 +157,9 @@ app.get("/closestpair", function (request, response) {
    let ans = { "distance":min};
 
    if(robots.length <= 1)
-     response.status(200).send();
+     response.status(204).send();
    else
      response.status(200).send(ans);
-
  });
 
 
